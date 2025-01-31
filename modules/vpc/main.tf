@@ -51,8 +51,8 @@ resource "aws_internet_gateway" "main" {
 }
 
 resource "aws_eip" "nat" {
-  count = length(var.private_subnets)
-  vpc   = true
+  count  = length(var.private_subnets)
+  domain = "vpc"
 
   tags = {
     Name        = "${var.environment}-nat-${count.index + 1}"
