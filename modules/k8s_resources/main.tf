@@ -101,6 +101,6 @@ resource "kubernetes_service" "nginx" {
       protocol    = "TCP"
     }
 
-    type = "ClusterIP"
+    type = "LoadBalancer"
   }
 }
