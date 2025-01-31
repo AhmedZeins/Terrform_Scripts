@@ -22,10 +22,10 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
 resource "aws_eks_cluster" "main" {
   name     = var.cluster_name
   role_arn = aws_iam_role.eks_cluster.arn
-  version  = "1.27"
+  version  = "1.28"
 
   vpc_config {
-    subnet_ids              = var.private_subnets
+    subnet_ids              = var.subnet_ids
     endpoint_private_access = true
     endpoint_public_access  = true
   }
@@ -33,10 +33,6 @@ resource "aws_eks_cluster" "main" {
   depends_on = [
     aws_iam_role_policy_attachment.eks_cluster_policy
   ]
-
-  tags = {
-    Environment = var.environment
-  }
 }
 
 data "aws_iam_policy_document" "eks_node_assume_role" {
