@@ -13,6 +13,11 @@ variable "private_subnets" {
   type        = list(string)
 }
 
+variable "subnet_ids" {
+  description = "List of subnet IDs for the EKS cluster"
+  type        = list(string)
+}
+
 variable "environment" {
   description = "Environment name"
   type        = string
