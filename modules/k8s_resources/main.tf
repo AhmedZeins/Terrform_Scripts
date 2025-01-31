@@ -15,10 +15,10 @@ resource "kubernetes_namespace" "notes_app" {
 
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name      = "notes-app-redis"
+    name      = "nginx"
     namespace = kubernetes_namespace.notes_app.metadata[0].name
     labels = {
-      app = "notes-app-redis"
+      app = "nginx"
     }
   }
 
@@ -27,14 +27,14 @@ resource "kubernetes_deployment" "nginx" {
 
     selector {
       match_labels = {
-        app = "notes-app-redis"
+        app = "nginx"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "notes-app-redis"
+          app = "nginx"
         }
       }
 
@@ -83,16 +83,16 @@ resource "kubernetes_deployment" "nginx" {
 
 resource "kubernetes_service" "nginx" {
   metadata {
-    name      = "notes-app-redis-service"
+    name      = "nginx-service"
     namespace = kubernetes_namespace.notes_app.metadata[0].name
     labels = {
-      app = "notes-app-redis"
+      app = "nginx"
     }
   }
 
   spec {
     selector = {
-      app = "notes-app-redis"
+      app = "nginx"
     }
 
     port {
